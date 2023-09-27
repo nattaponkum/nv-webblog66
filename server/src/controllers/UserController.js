@@ -32,11 +32,13 @@ module.exports = {
     async put (req, res){
         // res.send('แก้ไขข้อมูลผู้ใช้ ' + req.params.userId + " " + JSON.stringify(req.body.name))
         try {
-            await User.update(req.body,{
+            console.log(req.body)
+            let updatedUser = await User.update(req.body,{
                 where: {
                     id: req.params.userId
                 }
             })
+            console.log(updatedUser)
             res.send(req.body)
         } catch (error) {
             res.status(500).send({
@@ -49,6 +51,7 @@ module.exports = {
     async delete (req, res){
         // res.send('ลบข้อมูลผู้ใช้ ' + req.params.userId + " " + JSON.stringify(req.body.name))
         try {
+            console.log(req.params.userId)
             const user = await User.findOne({
                 where: {
                     id: req.params.userId
